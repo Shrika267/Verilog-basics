@@ -1,0 +1,14 @@
+module tb_half_substractor;
+  reg a, b;
+  wire D, B;
+  half_substractor uut(.a(a), .b(b), .D(D), .B(B));
+  initial
+    begin
+      $display("a  b  |  D  B");
+      a=0; b=1; #5;$display("%b  %b  |  %b  %b",a, b, D, B);
+      a=0; b=0; #5;$display("%b  %b  |  %b  %b",a, b, D, B);
+      a=1; b=0; #5;$display("%b  %b  |  %b  %b",a, b, D, B);
+      a=1; b=1; #5;$display("%b  %b  |  %b  %b",a, b, D, B);
+      $finish;
+    end
+  endmodule
