@@ -1,0 +1,16 @@
+module testbench;
+  reg [3:0]I;
+  wire [1:0]O;
+  encoder_4to2 uut (.I(I), .O(O));
+  initial
+    begin
+      $display("I3 I2 I1 I0 | O1 O0");
+      $display("--------------------");
+      $display("%b  %b  %b  %b |  %b  %b",I[3],I[2],I[1],I[0], O[1],O[0]);
+      I = 4'b0010; #10; $display("%b  %b  %b  %b | %b  %b",I[3],I[2],I[1],I[0], O[1],O[0]);
+      I = 4'b0100; #10; $display("%b  %b  %b  %b | %b  %b",I[3],I[2],I[1],I[0], O[1],O[0]);
+      I = 4'b1000; #10; $display("%b  %b  %b  %b | %b  %b",I[3],I[2],I[1],I[0], O[1],O[0]);
+      I = 4'b0000; #10; $display("%b  %b  %b  %b | %b  %b",I[3],I[2],I[1],I[0], O[1],O[0]);
+      $finish;
+  end
+endmodule
