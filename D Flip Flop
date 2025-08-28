@@ -1,0 +1,11 @@
+module dff (clk, rst, data_in, data_out);
+  input clk, rst, data_in;
+  output reg data_out;
+  always@(posedge clk or posedge rst)
+    begin
+      if(rst)
+        data_out<=1'b0; //reset output to 0
+      else
+        data_out<=data_in; //on positive clock edge Q follows data_in
+    end
+endmodule
