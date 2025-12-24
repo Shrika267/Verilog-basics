@@ -1,0 +1,8 @@
+module SOP(A,B,Y);
+  input A,B;
+  output Y;
+  wire t1,t2,Y;
+  and G1 (t1,~A,B);
+  and G2 (t2,A,B);
+  or G3 (Y,t1,t2);
+endmodule
