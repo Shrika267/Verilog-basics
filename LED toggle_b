@@ -1,0 +1,6 @@
+module led_toggle(input clk, output reg led=0);
+  always @(posedge clk)
+  begin
+    led<=~led;
+  end
+endmodule
