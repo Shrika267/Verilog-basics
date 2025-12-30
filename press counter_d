@@ -1,0 +1,10 @@
+module press_counter(input  clk,input  rst,input  btn,output reg [3:0] count);
+  always @(posedge clk) begin
+    if (rst)
+      count <= 0;           
+    else if (btn)
+      count <= count + 1;   
+    else
+      count <= count;       
+  end
+endmodule
