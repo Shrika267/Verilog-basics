@@ -1,0 +1,17 @@
+//ones the light is ON, it is ON forever one's the clock is at positive edge
+`timescale 1ns/1ns
+module light_memory_tb;
+  reg clk;
+  wire light;
+  light_memory uut(.clk(clk), .light(light));
+  always #5 clk=~clk;
+  initial
+    begin
+      clk=0;
+      #45 $finish;
+    end
+  initial
+    begin
+      $monitor("time=%b | clk=%b | light=%b",$time,clk,light);
+    end
+endmodule
