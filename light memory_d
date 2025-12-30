@@ -1,0 +1,7 @@
+//ones the light is ON, it is ON forever one's the clock is at positive edge
+module light_memory(input clk, output reg light);
+  always @(posedge clk)
+    begin
+      light<=1'b1;
+    end 
+endmodule
