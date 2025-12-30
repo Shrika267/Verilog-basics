@@ -1,0 +1,11 @@
+module led_toggle_tb;
+  reg clk=0;
+  wire led;
+  led_toggle uut (.clk(clk), .led(led));
+  always #5 clk=~clk;
+  initial
+    begin
+      $monitor ("time=%0t | clk=%b | led=%b",$time,clk,led);
+      #50 $finish;
+    end
+endmodule
