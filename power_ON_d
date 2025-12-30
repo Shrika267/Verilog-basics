@@ -1,0 +1,10 @@
+//Turn an LED ON at the first clock edge after reset is released, and keep it ON until reset happens again.
+module power_ON(input clk,input rst,output reg  led);
+  always @(posedge clk)
+    begin
+      if (rst)
+        led<=1'b0;
+      else
+        led<=1'b1;
+    end 
+endmodule
