@@ -1,0 +1,18 @@
+//Turn an LED ON at the first clock edge after reset is released, and keep it ON until reset happens again.
+`timescale 1ns/1ns
+module power_ON_tb;
+  reg clk;
+  reg rst;
+  wire led;
+  power_ON uut(.clk(clk), .rst(rst), .led(led));
+  always #5 clk=~clk;
+  initial
+    begin
+      clk=0;
+      #50 $finish;
+    end
+  initial
+    begin
+      $monitor("time=%0t | rst=%b | led=%b",$time,rst,led);
+    end
+endmodule
