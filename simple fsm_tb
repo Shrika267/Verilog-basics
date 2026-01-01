@@ -1,0 +1,22 @@
+`timescale 1ns/1ns
+module simple_fsm_tb;
+  reg clk;
+  reg rst;
+  reg btn;
+  wire led;
+  simple_fsm uut(.clk(clk), .rst(rst), .btn(btn), .led(led));
+  always #5clk=~clk;
+  initial
+    begin
+      clk=0;
+      rst=1;
+      btn=0;
+      #10 rst=0;
+      #10 btn=1;
+      #10 btn=0;
+      #20 rst=1;
+      #10 $finish;
+    end
+  initial
+    $monitor("t=%0t | clk=%b | rst=%b | btn=%b | led=%b",$time,clk,rst,btn,led);
+endmodule
