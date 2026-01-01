@@ -1,0 +1,14 @@
+module toggle_fsm(input clk,input rst, input btn, output reg led);
+  reg state;
+  always @(posedge clk)
+    begin
+      if (rst)
+        state<=1'b0;
+      else if (btn)
+        state<=~state;
+    end
+  always @(*)
+    begin
+      led=state;
+    end
+endmodule
