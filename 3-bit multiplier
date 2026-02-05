@@ -1,0 +1,80 @@
+module and_gate(
+    input a,
+    input b,
+    output y
+);
+assign y = a & b;
+endmodule
+
+
+module half_adder(
+    input a,
+    input b,
+    output sum,
+    output carry
+);
+assign sum = a ^ b;
+assign carry = a & b;
+endmodule
+
+
+module full_adder(
+    input a,
+    input b,
+    input cin,
+    output sum,
+    output cout
+);
+wire s1, c1, c2;
+half_adder H1(a, b, s1, c1);
+half_adder H2(s1, cin, sum, c2);
+assign cout = c1 | c2;
+endmodule
+
+
+module adder_3bit(
+    input [2:0] A,
+    input [2:0] B,
+    output [3:0] SUM
+);
+wire c1, c2;
+full_adder F0(A[0], B[0], 1'b0, SUM[0], c1);
+full_adder F1(A[1], B[1], c1, SUM[1], c2);
+full_adder F2(A[2], B[2], c2, SUM[2], SUM[3]);
+endmodule
+
+
+module multiplier_3bit(
+    input [2:0] A,
+    input [2:0] B,
+    output [5:0] P
+);
+wire pp00, pp01, pp02;
+wire pp10, pp11, pp12;
+wire pp20, pp21, pp22;
+wire [3:0] sum1;
+wire [3:0] sum2;
+
+and_gate g1(A[0], B[0], pp00);
+and_gate g2(A[1], B[0], pp01);
+and_gate g3(A[2], B[0], pp02);
+
+and_gate g4(A[0], B[1], pp10);
+and_gate g5(A[1], B[1], pp11);
+and_gate g6(A[2], B[1], pp12);
+
+and_gate g7(A[0], B[2], pp20);
+and_gate g8(A[1], B[2], pp21);
+and_gate g9(A[2], B[2], pp22);
+
+adder_3bit A1({pp02,pp01,pp00},{pp12,pp11,pp10},sum1);
+adder_3bit A2({sum1[2],sum1[1],sum1[0]},{pp22,pp21,pp20},sum2);
+
+assign P[0] = pp00;
+assign P[1] = sum1[0];
+assign P[2] = sum2[0];
+assign P[3] = sum2[1];
+assign P[4] = sum2[2];
+assign P[5] = sum2[3];
+
+endmodule
